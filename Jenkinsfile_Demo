@@ -26,7 +26,7 @@ pipeline {
                 PASSWORD = credentials('DOCKER_REGISTRY_PASSWORD')
             }          
             steps {
-                sh '''docker build -t nithinpj09/website:1.0 .
+                sh '''docker build -t nithinpj09/classifier:1.0 .
                     echo $PASSWORD | docker login -u $USERNAME --password-stdin
                     docker push nithinpj09/classifier:1.0'''
             }
