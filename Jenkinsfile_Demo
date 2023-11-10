@@ -79,7 +79,7 @@ pipeline {
                         docker rm myApp                      
                     fi
                     docker rmi nithinpj09/classifier:1.0
-                    docker run -d --restart always -p 80:80 --name myApp nithinpj09/classifier:1.0
+                    docker run -d --restart always -p 80:8000 --name myApp nithinpj09/classifier:1.0
                     exit
                     EOF'''
             }
