@@ -49,7 +49,7 @@ pipeline {
         stage('---Installation---') {
             steps {
                 sleep time: 5, unit: 'SECONDS'
-                sh '''ssh -i private.pem -o StrictHostKeyChecking=accept-new -T ubuntu@$PUBLIC_IP <<EOF
+                sh '''ssh -i private.pem -o StrictHostKeyChecking=no -T ubuntu@$PUBLIC_IP <<EOF
                     whoami
                     sudo apt update
                     sudo snap install docker
@@ -59,7 +59,7 @@ pipeline {
         }  
         stage('---Configuration---') {
             steps {
-                sh '''ssh -i private.pem -o StrictHostKeyChecking=accept-new -T ubuntu@$PUBLIC_IP <<EOF
+                sh '''ssh -i private.pem -o StrictHostKeyChecking=no -T ubuntu@$PUBLIC_IP <<EOF
                     sudo groupadd docker
                     sudo usermod -aG docker ubuntu
                     newgrp docker
@@ -71,7 +71,7 @@ pipeline {
         }
         stage('---Deployment---') {
             steps {
-                sh '''ssh -i private.pem -o StrictHostKeyChecking=accept-new -T ubuntu@$PUBLIC_IP <<EOF
+                sh '''ssh -i private.pem -o StrictHostKeyChecking=no -T ubuntu@$PUBLIC_IP <<EOF
                     if docker ps | grep -q 'myApp'
                     then 
                         echo "Stopping and removing the container."
